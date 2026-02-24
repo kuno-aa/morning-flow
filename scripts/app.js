@@ -148,7 +148,70 @@ class MorningFlowApp {
     this.editor = new RoutineEditor(this);
 
     this.homeStartBtn.addEventListener('click', () => this.startRoutine());
-    this.homeEditBtn.addEventListener('click', () => this.openEditor());
+
+    // Unlock Logic for Edit Button
+    this.unlockModal = document.getElementById('unlockModal');
+    this.codeInput = document.getElementById('codeInput');
+
+    // 正解のハッシュ値 (SHA-256ハッシュ)
+    const EXPECTED_HASH = '5873756cd7c67fd0127748a95d896021f5a074b2811e705054cf9dab2dbf98b5';
+    // ソルト
+    const SALT = 'm0rn1ng_fl0w_s3cr3t';
+
+    // ハッシュ計算ユーティリティ
+    const calculateHash = async (text) => {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(text);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+    };
+
+    this.homeEditBtn.addEventListener('click', async () => {
+      // LocalStorageから「保存されたハッシュ値」を取得
+      const savedHash = localStorage.getItem('morningFlow_unlockToken');
+
+      // 保存用ハッシュを検証 (パスコード検証用ハッシュ + ソルト のSHA-256)
+      const expectedStorageHash = await calculateHash(EXPECTED_HASH + SALT);
+
+      // 保存されたハッシュ値が期待されるソルト付きハッシュ値と一致するかチェック
+      if (savedHash === expectedStorageHash) {
+        this.openEditor();
+      } else {
+        this.unlockModal.classList.remove('hidden');
+      }
+    });
+
+    document.getElementById('codeCancelBtn').addEventListener('click', () => {
+      this.unlockModal.classList.add('hidden');
+      this.codeInput.value = '';
+    });
+
+    document.getElementById('codeSubmitBtn').addEventListener('click', async () => {
+      // 入力されたコードを大文字に揃えて空白除去
+      const userCode = this.codeInput.value.trim().toUpperCase();
+      if (!userCode) return alert('コードを入力してください');
+
+      try {
+        const hashed = await calculateHash(userCode);
+
+        if (hashed === EXPECTED_HASH) {
+          // 照合成功：LocalStorageには「検証用ハッシュ＋ソルト」のハッシュを保存する。
+          // これにより、ソースコード上の EXPECTED_HASH をコピペしただけでは突破できない
+          const storageHash = await calculateHash(EXPECTED_HASH + SALT);
+          localStorage.setItem('morningFlow_unlockToken', storageHash);
+
+          this.unlockModal.classList.add('hidden');
+          this.codeInput.value = '';
+          this.openEditor();
+        } else {
+          alert('コードが違います。アンケート送信画面のコードを正しくご入力ください。');
+        }
+      } catch (e) {
+        console.error("Hashing failed", e);
+        alert('エラーが発生しました。');
+      }
+    });
+
     this.routineHomeBtn.addEventListener('click', () => this.goHome());
 
     this.renderHomePreview();

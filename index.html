@@ -170,6 +170,31 @@
     </div>
 
     <!-- ============================== -->
+    <!-- Unlock Modal                   -->
+    <!-- ============================== -->
+    <div class="modal-overlay hidden" id="unlockModal">
+      <div class="modal">
+        <div style="font-size: 3rem; text-align: center; margin-bottom: 1rem;">🎁</div>
+        <h3 class="modal-title" style="text-align: center;">テストユーザー限定機能</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 1.5rem; text-align: center; font-size: 0.9rem;">
+          Morning Flow開発者である私は「朝の課題」を本気で解決したいと考えています。<br>
+          <a href="https://forms.gle/hPor46MrdyBC2FMF9" target="_blank" id="surveyLinkAnchor"
+            style="color: var(--accent); font-weight: bold; text-decoration: underline;">こちらの3分アンケート</a> に答えて、<br>
+          <strong>ルーティンカスタマイズ機能</strong>を解放しませんか？<br>
+          <span style="font-size: 0.8rem; opacity: 0.8;">※送信完了後画面に表示されるコードを下に入力</span>
+        </p>
+        <div class="modal-field">
+          <input type="text" id="codeInput" class="modal-input" placeholder="コードを入力"
+            style="text-align: center; letter-spacing: 2px;">
+        </div>
+        <div class="modal-actions">
+          <button class="modal-btn modal-btn-cancel" id="codeCancelBtn">今はやめる</button>
+          <button class="modal-btn modal-btn-save" id="codeSubmitBtn">アンロック</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================== -->
     <!-- Item Edit Modal                -->
     <!-- ============================== -->
     <div class="modal-overlay hidden" id="editModal">
