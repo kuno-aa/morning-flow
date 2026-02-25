@@ -374,6 +374,7 @@ body {
   display: flex;
   gap: var(--space-sm);
   padding-top: var(--space-sm);
+  padding-bottom: var(--space-sm);
 }
 
 .nav-btn {
