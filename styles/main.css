@@ -92,8 +92,6 @@ body {
   max-width: 500px;
   margin: 0 auto;
   padding: var(--space-md);
-  /* Slightly tighter bottom padding, still respecting safe-area */
-  padding-bottom: calc(var(--space-sm) + env(safe-area-inset-bottom, 0px));
   background: var(--bg-primary);
 }
 
@@ -1181,7 +1179,6 @@ body {
   .app-container {
     padding-left: max(var(--space-md), env(safe-area-inset-left));
     padding-right: max(var(--space-md), env(safe-area-inset-right));
-    padding-bottom: max(var(--space-md), env(safe-area-inset-bottom));
   }
 }
 
