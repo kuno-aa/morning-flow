@@ -263,10 +263,13 @@ body {
 .completion-screen {
   display: none;
   flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: var(--space-lg);
+  padding: var(--space-md);
 }
 
 .completion-screen.active {
@@ -287,8 +290,8 @@ body {
 }
 
 .completion-emoji {
-  font-size: 6rem;
-  margin-bottom: var(--space-md);
+  font-size: 4.5rem;
+  margin-bottom: var(--space-sm);
   animation: celebrate 0.6s ease-out;
 }
 
@@ -307,9 +310,9 @@ body {
 }
 
 .completion-title {
-  font-size: var(--font-size-3xl);
+  font-size: clamp(1.4rem, 7vw, var(--font-size-3xl));
   font-weight: 700;
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-xs);
   background: var(--gradient-success);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -317,16 +320,16 @@ body {
 }
 
 .completion-message {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-base);
   color: var(--text-secondary);
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-md);
 }
 
 .completion-stats {
   display: flex;
   justify-content: center;
   gap: var(--space-xl);
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-md);
 }
 
 .stat-item {
