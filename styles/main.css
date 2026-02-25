@@ -667,7 +667,7 @@ body {
 }
 
 /* Small screen heights (e.g., iPhone SE) */
-@media (max-height: 700px) {
+@media (max-height: 900px) {
   .app-container {
     padding: var(--space-sm);
     padding-bottom: 0;
@@ -707,7 +707,7 @@ body {
   }
 
   .home-actions {
-    gap: var(--space-sm);
+    gap: var(--space-xs);
   }
 
   .home-start-btn {
