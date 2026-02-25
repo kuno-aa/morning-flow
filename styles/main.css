@@ -92,6 +92,8 @@ body {
   max-width: 500px;
   margin: 0 auto;
   padding: var(--space-md);
+  /* Bottom padding accounts for browser UI (e.g. Chrome bottom bar) */
+  padding-bottom: calc(var(--space-md) + env(safe-area-inset-bottom, 0px));
   background: var(--bg-primary);
 }
 
@@ -133,6 +135,9 @@ body {
 
 .step-display {
   flex: 1;
+  min-height: 0;
+  /* Allow this flex child to shrink below content size */
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -167,8 +172,8 @@ body {
 }
 
 .step-emoji {
-  font-size: 5rem;
-  margin-bottom: var(--space-md);
+  font-size: 4rem;
+  margin-bottom: var(--space-sm);
   animation: float 3s ease-in-out infinite;
 }
 
@@ -185,19 +190,21 @@ body {
 }
 
 .step-title {
-  font-size: var(--font-size-3xl);
+  font-size: clamp(1.4rem, 6vw, var(--font-size-3xl));
   font-weight: 700;
   margin-bottom: var(--space-sm);
   background: var(--gradient-accent);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  /* Prevent extremely long titles from causing overflow */
+  word-break: break-word;
 }
 
 .step-tip {
   font-size: var(--font-size-base);
   color: var(--text-secondary);
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-sm);
   line-height: 1.5;
 }
 
@@ -208,13 +215,13 @@ body {
 .timer-container {
   display: flex;
   justify-content: center;
-  margin-top: var(--space-md);
+  margin-top: var(--space-sm);
 }
 
 .timer-ring {
   position: relative;
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
 }
 
 .timer-svg {
@@ -365,7 +372,7 @@ body {
   flex-shrink: 0;
   display: flex;
   gap: var(--space-sm);
-  padding-top: var(--space-md);
+  padding-top: var(--space-sm);
 }
 
 .nav-btn {
