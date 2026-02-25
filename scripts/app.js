@@ -828,4 +828,32 @@ class RoutineEditor {
 
 document.addEventListener('DOMContentLoaded', () => {
   new MorningFlowApp();
+  initOrientationGuard();
 });
+
+// =========================================
+// Orientation Guard (Portrait Only)
+// =========================================
+
+function initOrientationGuard() {
+  const overlay = document.getElementById('orientationOverlay');
+  if (!overlay) return;
+
+  // window.orientation is undefined on desktop → skip entirely
+  if (typeof window.orientation === 'undefined') return;
+
+  function updateOverlay() {
+    if (Math.abs(window.orientation) === 90) {
+      // 横向き
+      overlay.classList.add('visible');
+    } else {
+      // 縦向き
+      overlay.classList.remove('visible');
+    }
+  }
+
+  window.addEventListener('orientationchange', updateOverlay);
+
+  // Check on load too
+  updateOverlay();
+}

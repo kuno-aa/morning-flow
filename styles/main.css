@@ -1183,3 +1183,79 @@ body {
     padding-bottom: max(var(--space-md), env(safe-area-inset-bottom));
   }
 }
+
+/* =========================================
+   Landscape Orientation Warning Overlay
+   ========================================= */
+
+.orientation-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: linear-gradient(135deg, #f5f7fa, #e8eaf6);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.orientation-overlay.visible {
+  display: flex;
+}
+
+.orientation-overlay-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: orientationPulse 2s ease-in-out infinite;
+}
+
+@keyframes orientationPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.orientation-phone-icon {
+  font-size: 4rem;
+  transform: rotate(90deg);
+  display: inline-block;
+}
+
+.orientation-arrow {
+  font-size: 2.5rem;
+  color: var(--accent);
+  animation: rotateArrow 1.5s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes rotateArrow {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(-30deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.orientation-message {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  letter-spacing: 0.05em;
+}
