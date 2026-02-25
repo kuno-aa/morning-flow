@@ -670,6 +670,7 @@ body {
 @media (max-height: 700px) {
   .app-container {
     padding: var(--space-sm);
+    padding-bottom: 0;
   }
 
   .home-hero {
