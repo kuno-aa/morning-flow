@@ -92,8 +92,8 @@ body {
   max-width: 500px;
   margin: 0 auto;
   padding: var(--space-md);
-  /* Bottom padding accounts for browser UI (e.g. Chrome bottom bar) */
-  padding-bottom: calc(var(--space-md) + env(safe-area-inset-bottom, 0px));
+  /* Slightly tighter bottom padding, still respecting safe-area */
+  padding-bottom: calc(var(--space-sm) + env(safe-area-inset-bottom, 0px));
   background: var(--bg-primary);
 }
 
@@ -448,7 +448,8 @@ body {
   text-align: center;
   position: relative;
   overflow: hidden;
-  padding: var(--space-lg) 0;
+  /* Reduced vertical padding (3rem -> 1rem) */
+  padding: var(--space-sm) 0;
 }
 
 /* Floating particles */
@@ -531,7 +532,7 @@ body {
 .home-hero {
   position: relative;
   z-index: 1;
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-md);
 }
 
 .home-icon {
@@ -567,7 +568,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius-lg);
   padding: var(--space-sm) var(--space-md);
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-md);
 }
 
 .home-preview-label {
