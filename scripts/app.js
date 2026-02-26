@@ -122,6 +122,15 @@ let routineSteps = loadSteps();
 function showScreen(screenId) {
   document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
   document.getElementById(screenId).classList.remove('hidden');
+
+  // GA4 Screen Tracking
+  if (typeof gtag === 'function') {
+    gtag('event', 'page_view', {
+      page_title: screenId,
+      page_location: window.location.href,
+      page_path: '/' + screenId
+    });
+  }
 }
 
 // =========================================
@@ -147,7 +156,16 @@ class MorningFlowApp {
     this.routine = new MorningRoutine(this);
     this.editor = new RoutineEditor(this);
 
-    this.homeStartBtn.addEventListener('click', () => this.startRoutine());
+    this.homeStartBtn.addEventListener('click', () => {
+      // GA4 Event: Start Routine
+      if (typeof gtag === 'function') {
+        gtag('event', 'routine_start', {
+          event_category: 'engagement',
+          event_label: 'Home Start Button'
+        });
+      }
+      this.startRoutine();
+    });
 
     // Unlock Logic for Edit Button
     this.unlockModal = document.getElementById('unlockModal');
@@ -202,6 +220,15 @@ class MorningFlowApp {
 
           this.unlockModal.classList.add('hidden');
           this.codeInput.value = '';
+
+          // GA4 Event: Editor Unlocked
+          if (typeof gtag === 'function') {
+            gtag('event', 'editor_unlocked', {
+              event_category: 'feature_unlock',
+              event_label: 'Success'
+            });
+          }
+
           this.openEditor();
         } else {
           alert('コードが違います。アンケート送信画面のコードを正しくご入力ください。');
